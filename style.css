@@ -1,0 +1,21 @@
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.content{
+  display:none;
+}
+
+
+
+button {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  font-family: arial, sans-serif;
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 18px;
+}
+
