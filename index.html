@@ -5,23 +5,38 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<title>Capstone
-  
-  </title>
+
+	</title>
 	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link rel="shortcut icon" type="image/mountain-icon" href="favicon.ico">
 </head>
 
 <body>
 	<header>
-		<h1>Hiking Rocky Mountain National Park</h1>
+		<h1>Hiking in Rocky Mountain <br>National Park</h1>
 	</header>
-	<h2>List of hikes:</h2>
+
+  <div class="wrapper">
+    <div class='group'>
+      <div class='item'>
+	<h3>Listed below are the hikes in Rocky Mountain National Park.</h3>
+  <h4>Click the trail name to see additional information about the hike.</h4>
+      </div>
+      <div class='item'>
+        <br>
+      <form id="js-form">
+            <label for="js-search-term">Search for trail:</label><br>
+            <input type="text" name="search-term" id="js-search-term" placeholder="Trail Name" required><br>
+            <input type="submit" value="Search!">
+      </div></div>
 
 	<p id="js-error-message" class="error-message"></p>
-
+  </div>
 <section>
+  <div class="wrapper">
 	<div class="results">
   <div class="youtube-results"></div>
-
+	</div>
   </div>
 </section>
 
