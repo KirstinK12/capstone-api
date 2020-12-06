@@ -17,7 +17,7 @@ function getHikes() {
     });
 }
 
-function displayResults(responseJson) {
+function displayResults(responseJson, searchTerm) {
   //console.log(responseJson);
 
   const estesOnlyTrails = responseJson.trails.filter(trail => {
@@ -26,21 +26,28 @@ function displayResults(responseJson) {
 
   for (let i = 0; i < estesOnlyTrails.length; i++) {
     const currentTrail = estesOnlyTrails[i]
+
+    if (currentTrail.id === 705646) {
+      continue
+    }
+
     if (currentTrail.location === "Estes Park, Colorado") {
 
       $('.results').append(`<div class='result-${currentTrail.name}'>
+      <div class="group">
+        <div class="item">
  <button id="toggle-${currentTrail.id}">
  <h3>${currentTrail.name}</h3></button>
- <div>Summary: ${currentTrail.summary}</div><br>
- <div>Length: ${currentTrail.length} miles</div><br>
-
+ <div><b>Summary:</b><br> ${currentTrail.summary}</div><br>
+ <div><b>Length:</b><br> ${currentTrail.length} miles</div><br>
   <div id="content-${currentTrail.id}" class='content'> 
- <div>Difficulty: ${currentTrail.difficulty}</div><br>
- <div>Ascent: ${currentTrail.ascent}</div><br>
- <div>Altitude: ${currentTrail.high} feet</div><br>
- <div>Current Conditions: ${currentTrail.conditionStatus}</div><br>
- <div><img src="${currentTrail.imgMedium}" alt="Trail Picture" width=500px height=300px></div>
- <div></div>`)
+ <div><b>Ascent:</b><br> ${currentTrail.ascent}</div><br>
+ <div><b>Altitude:</b><br> ${currentTrail.high} feet</div><br>
+ <div><b>Current Conditions:</b><br> ${currentTrail.conditionStatus}</div><br>
+</div></div>
+ 
+<div class="item-picture"><img src="${currentTrail.imgMedium}" alt="Trail Picture" width=500px height=300px></div>
+ </div></div>`)
 
       let toggle = document.getElementById(`toggle-${currentTrail.id}`);
       let selectedContent = document.getElementById(`content-${currentTrail.id}`);
@@ -54,17 +61,16 @@ function displayResults(responseJson) {
 
         if (selectedContent.style.display === 'none') {
           selectedContent.style.display = 'block'
-
           getYouTubeVideos(`${currentTrail.name}, Rocky Mountain National Park`, selectedContent)
 
         }
         else { selectedContent.style.display = 'none' };
 
       })
-
     }
   }
 }
+
 
 const apiKey = 'AIzaSyD-wTO-pgN4n-0etXqDG7YjTo5_6UveKps';
 const youtubeURL = 'https://www.googleapis.com/youtube/v3/search';
