@@ -3,7 +3,7 @@
 const hikingURL = 'https://www.hikingproject.com/data/get-trails?lat=40.3772&lon=-105.5217&maxDistance=100&maxResults=500&key=200010523-65a91fc7d6ebfbd5ac9a7c58752ca49c'
 
 function getHikes() {
-
+  var searchJson = undefined;
   fetch(hikingURL)
     .then(response => {
       if (response.ok) {
@@ -11,25 +11,41 @@ function getHikes() {
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => displayResults(responseJson))
+
+    .then(responseJson => {
+      searchJson = responseJson
+      return displayResults(responseJson)
+    })
+
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
+
+  $('form').submit(event => {
+    event.preventDefault();
+    const searchTerm = $('#js-search-term').val();
+    searchResults(searchJson, searchTerm)
+
+    $('#js-form')[0].reset();
+  })
 }
 
-function displayResults(responseJson, searchTerm) {
-  //console.log(responseJson);
+$(document).ready(function () {
+  $('#home-button').click(function () {
+    $('.results').empty();
+    getHikes();
+  });
+});
 
-  const estesOnlyTrails = responseJson.trails.filter(trail => {
-    return trail.location === 'Estes Park, Colorado';
+function searchResults(responseJson, searchTerm) {
+  const trailSearch = responseJson.trails.filter(trail => {
+    return trail.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
-  for (let i = 0; i < estesOnlyTrails.length; i++) {
-    const currentTrail = estesOnlyTrails[i]
+  $('.results').empty();
 
-    if (currentTrail.id === 705646) {
-      continue
-    }
+  for (let i = 0; i < trailSearch.length; i++) {
+    const currentTrail = trailSearch[i]
 
     if (currentTrail.location === "Estes Park, Colorado") {
 
@@ -40,13 +56,12 @@ function displayResults(responseJson, searchTerm) {
  <h3>${currentTrail.name}</h3></button>
  <div><b>Summary:</b><br> ${currentTrail.summary}</div><br>
  <div><b>Length:</b><br> ${currentTrail.length} miles</div><br>
-  <div id="content-${currentTrail.id}" class='content'> 
- <div><b>Ascent:</b><br> ${currentTrail.ascent}</div><br>
+ <div id="content-${currentTrail.id}" class='content'> 
+ <div><b>Ascent:</b><br> ${currentTrail.ascent} feet</div><br>
  <div><b>Altitude:</b><br> ${currentTrail.high} feet</div><br>
- <div><b>Current Conditions:</b><br> ${currentTrail.conditionStatus}</div><br>
-</div></div>
+ <div><b>Current Conditions:</b><br> ${currentTrail.conditionStatus}</div></div>
  
-<div class="item-picture"><img src="${currentTrail.imgMedium}" alt="Trail Picture" width=500px height=300px></div>
+<div class="item-picture"><img src="${currentTrail.imgMedium}" alt="Trail Picture"></div>
  </div></div>`)
 
       let toggle = document.getElementById(`toggle-${currentTrail.id}`);
@@ -71,6 +86,59 @@ function displayResults(responseJson, searchTerm) {
   }
 }
 
+function displayResults(responseJson, searchTerm) {
+
+  const estesOnlyTrails = responseJson.trails.filter(trail => {
+    return trail.location === 'Estes Park, Colorado';
+  });
+
+  for (let i = 0; i < estesOnlyTrails.length; i++) {
+    const currentTrail = estesOnlyTrails[i]
+
+    if (currentTrail.id === 705646) {
+      continue
+    }
+
+    if (currentTrail.location === "Estes Park, Colorado") {
+
+      $('.results').append(`<div class='result-${currentTrail.name}'>
+      <div class="group">
+        <div class="item">
+ <button id="toggle-${currentTrail.id}">
+ <h3>${currentTrail.name}</h3></button>
+ <div><b>Summary:</b><br> ${currentTrail.summary}</div><br>
+ <div><b>Length:</b><br> ${currentTrail.length} miles</div><br>
+ 
+ <div id="content-${currentTrail.id}" class='content'> 
+ <div><b>Ascent:</b><br> ${currentTrail.ascent}</div><br>
+ <div><b>Altitude:</b><br> ${currentTrail.high} feet</div><br>
+ <div><b>Current Conditions:</b><br> ${currentTrail.conditionStatus}</div><br>
+</div></div>
+ 
+<div class="item-picture"><img src="${currentTrail.imgMedium}" alt="Trail Picture"></div>
+ </div></div>`)
+
+      let toggle = document.getElementById(`toggle-${currentTrail.id}`);
+      let selectedContent = document.getElementById(`content-${currentTrail.id}`);
+
+      selectedContent.style.display = 'none';
+
+      toggle.addEventListener("click", function (e) {
+        for (let j = 0; j < $('.content').length; j++) {
+          $('.content')[j].style.display = 'none'
+        }
+
+        if (selectedContent.style.display === 'none') {
+          selectedContent.style.display = 'block'
+          getYouTubeVideos(`${currentTrail.name}, Rocky Mountain National Park`, selectedContent)
+
+        }
+        else { selectedContent.style.display = 'none' };
+
+      })
+    }
+  }
+}
 
 const apiKey = 'AIzaSyD-wTO-pgN4n-0etXqDG7YjTo5_6UveKps';
 const youtubeURL = 'https://www.googleapis.com/youtube/v3/search';
@@ -89,13 +157,16 @@ function youtubeResults(responseJson, content) {
 
   $('.currentVid').remove()
 
+  let videoContainer = $(`<div class='videoContainer'></div>`)
 
   for (let i = 0; i < youtubeVideo.length; i++) {
-    $(content).append(`<div class='currentVid'>
-      <div><a href='https://www.youtube.com/watch?v=${youtubeVideo[i].id.videoId}' '_blank'>${youtubeVideo[i].snippet.title}</div></a><br>
-     <img src='${youtubeVideo[i].snippet.thumbnails.default.url}'>
-     <div><a href=${youtubeVideo[i].id.videoId}></div></div>`)
+    $(videoContainer).append(`
+      <div class='currentVid'>
+       <a href='https://www.youtube.com/watch?v=${youtubeVideo[i].id.videoId}', target="_blank"><img src='${youtubeVideo[i].snippet.thumbnails.default.url}'></a><br>
+    </div></div>`)
   };
+
+  $(content).append(videoContainer)
 
 };
 
