@@ -7,6 +7,7 @@
 	<title>Capstone
 
 	</title>
+
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" type="image/mountain-icon" href="favicon.ico">
 </head>
@@ -16,26 +17,32 @@
 		<h1>Hiking in Rocky Mountain <br>National Park</h1>
 	</header>
 
+<div class="topnav">
+<input type="button" value="Home" id="home-button" class="nav-button">
+  <div class="search-container">
+    <form id="js-form">
+            <label for="js-search-term">Search for trail:</label>
+            <input type="text" name="search-term" id="js-search-term" placeholder="Trail Name" required>
+            <input type="submit" class="nav-button" value="Search">
+    </form>
+  </div>
+</div>
+</nav>
+
   <div class="wrapper">
     <div class='group'>
       <div class='item'>
 	<h3>Listed below are the hikes in Rocky Mountain National Park.</h3>
   <h4>Click the trail name to see additional information about the hike.</h4>
-      </div>
-      <div class='item'>
-        <br>
-      <form id="js-form">
-            <label for="js-search-term">Search for trail:</label><br>
-            <input type="text" name="search-term" id="js-search-term" placeholder="Trail Name" required><br>
-            <input type="submit" value="Search!">
-      </div></div>
+  <hr></div></div></div>
 
 	<p id="js-error-message" class="error-message"></p>
-  </div>
+
 <section>
   <div class="wrapper">
 	<div class="results">
-  <div class="youtube-results"></div>
+  <div class="youtube-results">
+    </div>
 	</div>
   </div>
 </section>
