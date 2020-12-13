@@ -56,10 +56,13 @@ function searchResults(responseJson, searchTerm) {
  <h3>${currentTrail.name}</h3></button>
  <div><b>Summary:</b><br> ${currentTrail.summary}</div><br>
  <div><b>Length:</b><br> ${currentTrail.length} miles</div><br>
+ 
  <div id="content-${currentTrail.id}" class='content'> 
- <div><b>Ascent:</b><br> ${currentTrail.ascent} feet</div><br>
+ <div><b>Ascent:</b><br> ${currentTrail.ascent}</div><br>
  <div><b>Altitude:</b><br> ${currentTrail.high} feet</div><br>
- <div><b>Current Conditions:</b><br> ${currentTrail.conditionStatus}</div></div>
+ <div><b>Current Conditions:</b><br> ${currentTrail.conditionStatus}</div><br>
+ <b>Youtube Videos:</b><br><br>
+</div></div>
  
 <div class="item-picture"><img src="${currentTrail.imgMedium}" alt="Trail Picture"></div>
  </div></div>`)
@@ -113,6 +116,7 @@ function displayResults(responseJson, searchTerm) {
  <div><b>Ascent:</b><br> ${currentTrail.ascent}</div><br>
  <div><b>Altitude:</b><br> ${currentTrail.high} feet</div><br>
  <div><b>Current Conditions:</b><br> ${currentTrail.conditionStatus}</div><br>
+ <b>Youtube Videos:</b><br><br>
 </div></div>
  
 <div class="item-picture"><img src="${currentTrail.imgMedium}" alt="Trail Picture"></div>
@@ -160,7 +164,7 @@ function youtubeResults(responseJson, content) {
   let videoContainer = $(`<div class='videoContainer'></div>`)
 
   for (let i = 0; i < youtubeVideo.length; i++) {
-    $(videoContainer).append(`
+    $(videoContainer).append(`<br>
       <div class='currentVid'>
        <a href='https://www.youtube.com/watch?v=${youtubeVideo[i].id.videoId}', target="_blank"><img src='${youtubeVideo[i].snippet.thumbnails.default.url}'></a><br>
     </div></div>`)
