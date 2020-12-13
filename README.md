@@ -5,8 +5,8 @@
 [Hiking RMNP](https://kirstink12.github.io/hiking-RMNP/)
 
 ## Screenshots
-![Header Example](./header-screenshot.png)
-![Hike Info Example](./info-screenshot.png)
+![Header Example](header-screenshot.png)
+![Hike Info Example](hike-info-screenshot.png)
 
 ## Technologies
 * Tech 1 - HTML
@@ -14,4 +14,4 @@
 * Tech 3 - CSS
 
 ## Summary
-The purpose of this app is to include the important information on the hike, but also offer a quick and easy way to get a visual of what the hikes look like by making an API call to YouTube. 
+The purpose of this app is to be able to view all of the hikes within Rocky Mountain National Park with quick access to the top three hits on YouTube for the chosen hike name. From the main page you have access to a full list of each hike. With a click on the hike name it will toggle open with additional information and show the thumbnails for each YouTube video. Also from the main page, you can quickly find the hike you are looking for by using the search function.
