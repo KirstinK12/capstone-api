@@ -30,13 +30,6 @@ function getHikes() {
   })
 }
 
-$(document).ready(function () {
-  $('#home-button').click(function () {
-    $('.results').empty();
-    getHikes();
-  });
-});
-
 function searchResults(responseJson, searchTerm) {
   const trailSearch = responseJson.trails.filter(trail => {
     return trail.name.toLowerCase().includes(searchTerm.toLowerCase());
