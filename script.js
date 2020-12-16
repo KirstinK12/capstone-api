@@ -148,8 +148,6 @@ function formatQueryParams(params) {
 }
 
 function youtubeResults(responseJson, content) {
-  console.log(responseJson);
-
   const youtubeVideo = responseJson.items
 
   $('.currentVid').remove()
@@ -177,8 +175,6 @@ function getYouTubeVideos(query, content) {
   };
   const queryString = formatQueryParams(params)
   const url = youtubeURL + '?' + queryString;
-
-  console.log(url);
 
   fetch(url)
     .then(response => {
