@@ -1,3 +1,5 @@
+/* FORMAT FOR SMALL SCREEN */
+
 body {
   font-family: rockwell;
   background-color: lightgray;
@@ -12,11 +14,11 @@ header h1 {
   border-bottom: 3px solid black;
 }
 
-h3{
+h2{
   font-size: 25px;
 }
 
-h4{
+h3{
   font-size: 20px;
 }
 
@@ -32,7 +34,7 @@ img {
 .wrapper {
   width: 100%;
 }
-
+ /* TRAIL NAME TITLE */
 button {
   background: none!important;
   border: none;
@@ -45,6 +47,11 @@ button {
   font-size: 25px;
 }
 
+button:hover { 
+  color: maroon;
+}
+
+/* NAV BAR BUTTONS */
 .nav-button{
   background-color: #4E6639; 
   border: none;
@@ -56,11 +63,26 @@ button {
   font-size: 16px;
   font-family: rockwell;
 }
-
-button:hover { 
-  color: maroon;
+/* NAV BAR DESIGN */
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
 }
 
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  font-family: rockwell;
+}
+
+
+/* PAGE DESIGN */
 .group {
   display: flex;
   flex-direction: column;
@@ -95,6 +117,7 @@ button:hover {
   justify-content: space-evenly;
 }
 
+
 /* Desktop */
 @media all and (min-width: 1000px) {
   main {
@@ -114,11 +137,11 @@ header h1 {
     font-size: 55px;
   }
 
-  h3 {
+  h2 {
     font-size: 30px;
   }
 
-  h4 {
+  h3 {
     font-size: 25px;
   }
 
@@ -141,7 +164,7 @@ body{
   justify-content: flex-end;
   align-items: center;
 }
-
+/* NAV BAR */
 .nav-button{
   background-color: #4E6639;
   border: none;
@@ -154,25 +177,6 @@ body{
   font-family: rockwell;
 }
 }
-
-/* NAV BAR */
-.topnav {
-  overflow: hidden;
-  background-color: #e9e9e9;
-}
-
-.topnav .search-container {
-  float: right;
-}
-
-.topnav input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
-  font-family: rockwell;
-}
-
 @media screen and (max-width: 600px) {
   .topnav .search-container {
     float: none;
