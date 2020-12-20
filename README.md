@@ -5,7 +5,9 @@
 [Hiking RMNP](https://kirstink12.github.io/hiking-RMNP/)
 
 ## Screenshots
+### Header of website
 ![Header Example](./screenshots/header-screenshot.PNG)
+### Example of hike information
 ![Hike Info Example](./screenshots/hike-info-screenshot.PNG)
 
 ## Technologies
